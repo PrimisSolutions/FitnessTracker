@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using FitnessTrackerAPI.Data.Models;
 
+namespace FitnessTrackerAPI.Data;
 public class ApplicationDbContext : DbContext
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)

@@ -1,8 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using FitnessTrackerAPI.Data;
 using FitnessTrackerAPI.Data.Models;
 
-namespace FitnessTrackerAPI.Controllers
+namespace FitnessTrackerAPI.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
