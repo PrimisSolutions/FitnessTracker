@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "WYwUZBeLR1A=",
+  "dgSpecHash": "EOHjVe3sJeg=",
   "success": true,
   "projectFilePath": "C:\\Users\\44780\\Documents\\Github Projects\\React and dotNet\\FitnessTracker\\FitnessTrackerAPI\\FitnessTrackerAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\44780\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\44780\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",
+    "C:\\Users\\44780\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\44780\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\9.0.1\\microsoft.aspnetcore.authentication.jwtbearer.9.0.1.nupkg.sha512",
     "C:\\Users\\44780\\.nuget\\packages\\microsoft.aspnetcore.openapi\\9.0.1\\microsoft.aspnetcore.openapi.9.0.1.nupkg.sha512",
     "C:\\Users\\44780\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
