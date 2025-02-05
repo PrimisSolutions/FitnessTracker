@@ -2,3 +2,4 @@
 /FitnessTrackerAPI/obj
 /FitnessTrackerAPI/obj
 **/secrets.json
+*.pem
