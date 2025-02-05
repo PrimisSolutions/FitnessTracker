@@ -52,17 +52,15 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.MapOpenApi();
-}
+// Add this line to ensure routing is configured
+app.UseRouting();
 
 app.UseHttpsRedirection();
 
-// Use CORS (default policy)
+// Use CORS with the default policy
 app.UseCors();
 
+// Then add authentication/authorization
 app.UseAuthentication();
 app.UseAuthorization();
 
