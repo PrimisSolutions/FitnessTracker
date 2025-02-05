@@ -1,0 +1,9 @@
+curl.exe -k -X POST https://localhost:5054/api/auth/register -H "Content-Type: application/json" -d "{\"Email\":\"test@example.com\",\"Password\":\"password123\"}"
+
+POST https://localhost:5054/api/auth/register
+Content-Type: application/json
+
+{
+  "Email": "test@example.com",
+  "Password": "password123"
+}

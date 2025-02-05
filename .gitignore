@@ -1,3 +1,4 @@
 /FitnessTrackerAPI/bin/Debug
 /FitnessTrackerAPI/obj
 /FitnessTrackerAPI/obj
+**/secrets.json
