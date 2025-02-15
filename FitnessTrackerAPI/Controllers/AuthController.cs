@@ -60,19 +60,41 @@ public class AuthController : ControllerBase
     public async Task<IActionResult> Login([FromBody] LoginRequest request)
     {
         _logger.LogInformation("Logging in user with email: {Email}", request.Email);
+        try
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == request.Email);
+            if (user == null)
+            {
+                _logger.LogWarning("User not found for email: {Email}", request.Email);
+                return Unauthorized(new { Message = "User not found" });
+            }
 
-        var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == request.Email);
-        if (user == null || !BCrypt.Net.BCrypt.Verify(request.Password, user.PasswordHash))
-            return Unauthorized();
+            if (!BCrypt.Net.BCrypt.Verify(request.Password, user.PasswordHash))
+            {
+                _logger.LogWarning("Invalid password attempt for email: {Email}", request.Email);
+                return Unauthorized(new { Message = "Invalid password" });
+            }
 
-        var token = GenerateJwtToken(user);
-        return Ok(new { Token = token });
+            var token = GenerateJwtToken(user);
+            _logger.LogInformation("User logged in successfully with email: {Email}", request.Email);
+            return Ok(new { Token = token });
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error occurred while logging in user with email: {Email}", request.Email);
+            return StatusCode(500, "Internal server error");
+        }
     }
 
     private string GenerateJwtToken(User user)
     {
-        var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
-        var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+        var jwtKey = _configuration["Jwt:Key"] ?? 
+            throw new InvalidOperationException("JWT Key is not configured");
+
+        var credentials = new SigningCredentials(
+            new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey)),
+            SecurityAlgorithms.HmacSha256
+        );
 
         var token = new JwtSecurityToken(
             issuer: _configuration["Jwt:Issuer"],
@@ -89,16 +111,16 @@ public class AuthController : ControllerBase
 public class RegisterRequest
 {
     [Required]
-    public string Email { get; set; }
+    public required string Email { get; set; }
 
     [Required]
-    public string Password { get; set; }
+    public required string Password { get; set; }
 }
 
 public class LoginRequest {
     [Required]
-    public string Email { get; set; }
+    public required string Email { get; set; }
 
     [Required]
-    public string Password { get; set; }
+    public required string Password { get; set; }
 }
