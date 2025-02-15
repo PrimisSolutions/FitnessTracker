@@ -7,6 +7,7 @@ using BCrypt.Net;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.Extensions.Logging;
 using System.Text;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -19,32 +20,47 @@ public class AuthController : ControllerBase
 {
     private readonly ApplicationDbContext _context;
     private readonly IConfiguration _configuration;
+    private readonly ILogger<AuthController> _logger;
 
-    public AuthController(ApplicationDbContext context, IConfiguration configuration)
+    public AuthController(ApplicationDbContext context, IConfiguration configuration, ILogger<AuthController> logger)
     {
         _context = context;
         _configuration = configuration;
+        _logger = logger;
     }
 
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] RegisterRequest request)
     {
-        var user = new User
+        _logger.LogInformation("Registering user with email: {Email}", request.Email);
+
+        try
         {
+            var user = new User
+            {
             Email = request.Email,
             PasswordHash = BCrypt.Net.BCrypt.HashPassword(request.Password),
             Username = request.Email
-        };
+            };
 
-        _context.Users.Add(user);
-        await _context.SaveChangesAsync();
+            _context.Users.Add(user);
+            await _context.SaveChangesAsync();
 
-        return Ok(new { Message = "User registered successfully" });
+            _logger.LogInformation("User registered successfully with email: {Email}", request.Email);
+            return Ok(new { Message = "User registered successfully" });
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error occurred while registering user with email: {Email}", request.Email);
+            return StatusCode(500, "Internal server error");
+        }
     }
 
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] LoginRequest request)
     {
+        _logger.LogInformation("Logging in user with email: {Email}", request.Email);
+
         var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == request.Email);
         if (user == null || !BCrypt.Net.BCrypt.Verify(request.Password, user.PasswordHash))
             return Unauthorized();

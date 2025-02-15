@@ -8,11 +8,16 @@ const register = async (email, password) => {
 };
 
 const login = async (email, password) => {
-    const response = await axios.post(`${API_URL}/login`, { email, password });
-    if (response.data.token) {
-        localStorage.setItem('token', response.data.token);
+    try {
+        const response = await axios.post(`${API_URL}/login`, { email, password });
+        if (response.data.token) {
+            localStorage.setItem('token', response.data.token);
+        }
+        return response.data;
+    } catch (error) {
+        console.error('Login error:', error);
+        throw new Error('Login failed');
     }
-    return response.data;
 };
 
 const logout = () => {
