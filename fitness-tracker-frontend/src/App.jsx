@@ -4,6 +4,7 @@ import Dashboard from './components/Dashboard'
 import Register from './components/Register'
 import './App.css'
 import ProtectedRoute from './components/ProtectedRoute'
+import Workouts from './components/Workouts'
 
 function App() {
   return (
@@ -17,7 +18,12 @@ function App() {
             <Dashboard />
           </ProtectedRoute>
         } />
-      </Routes>
+        <Route path="/workouts" element={
+          <ProtectedRoute>
+            <Workouts />
+          </ProtectedRoute>
+        } />
+      </Routes> 
     </Router>
   )
 }
