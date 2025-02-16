@@ -3,27 +3,27 @@ import { Navigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 const ProtectedRoute = ({ children }) => {
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [loading, setLoading] = useState(true);
+	const [isAuthenticated, setIsAuthenticated] = useState(false);
+	const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        const token = localStorage.getItem('token');
-        if (token) {
-            setIsAuthenticated(true);
-        }
-        setLoading(false);
-    }, []);
+	useEffect(() => {
+		const token = localStorage.getItem('token');
+		if (token) {
+			setIsAuthenticated(true);
+		}
+		setLoading(false);
+	}, []);
 
-    if (loading) {
-        return <div>Loading...</div>
-    }
+	if (loading) {
+		return <div>Loading...</div>
+	}
 
-    return isAuthenticated ? children : <Navigate to="/" replace />;
+	return isAuthenticated ? children : <Navigate to="/" replace />;
 };
 
 // PropTypes validation (thanks SonarQube)
 ProtectedRoute.propTypes = {
-    children: PropTypes.node.isRequired
+	children: PropTypes.node.isRequired
 };
 
 export default ProtectedRoute;

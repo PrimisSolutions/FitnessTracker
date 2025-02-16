@@ -1,46 +1,46 @@
 .workouts-container {
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
+	padding: 20px;
+	max-width: 1200px;
+	margin: 0 auto;
 }
 
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 20px;
 }
 
 .back-button {
-    padding: 8px 16px;
-    background-color: #1a1a2e;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+	padding: 8px 16px;
+	background-color: #1a1a2e;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
 }
 
 .workouts-table {
-    width: 100%;
-    border-collapse: collapse;
-    background-color: #1a1a2e;
-    color: white;
-    border-radius: 8px;
-    overflow: hidden;
+	width: 100%;
+	border-collapse: collapse;
+	background-color: #1a1a2e;
+	color: white;
+	border-radius: 8px;
+	overflow: hidden;
 }
 
 .workouts-table th,
 .workouts-table td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #2d2d44;
+	padding: 12px;
+	text-align: left;
+	border-bottom: 1px solid #2d2d44;
 }
 
 .workouts-table th {
-    background-color: #2d2d44;
-    font-weight: bold;
+	background-color: #2d2d44;
+	font-weight: bold;
 }
 
 .workouts-table tr:hover {
-    background-color: #2d2d44;
+	background-color: #2d2d44;
 }

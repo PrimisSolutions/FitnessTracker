@@ -9,42 +9,42 @@ import Dashboard from '../Dashboard'
 vi.mock('axios')
 
 describe('Dashboard Component', () => {
-  const setup = async (mockData = []) => {
-    // Mock token in localStorage
-    localStorage.setItem('token', 'test-token')
+	const setup = async (mockData = []) => {
+		// Mock token in localStorage
+		localStorage.setItem('token', 'test-token')
 
-    // Mock axios response
-    axios.get.mockResolvedValue({
-      data: mockData
-    })
+		// Mock axios response
+		axios.get.mockResolvedValue({
+			data: mockData
+		})
 
-    return render(
-      <BrowserRouter>
-        <Dashboard />
-      </BrowserRouter>
-    )
-  }
+		return render(
+			<BrowserRouter>
+				<Dashboard />
+			</BrowserRouter>
+		)
+	}
 
-  it('renders and fetches workouts', async () => {
-    await setup([{ id: 1, type: 'Running', duration: 30 }])
+	it('renders and fetches workouts', async () => {
+		await setup([{ id: 1, type: 'Running', duration: 30 }])
 
-    // Wait for workouts to load
-    expect(await screen.findByText(/running - 30 minutes/i)).toBeInTheDocument()
-    // Verify axios call
-    expect(axios.get).toHaveBeenCalledWith('https://localhost:5001/api/workouts', {
-      headers: { Authorization: 'Bearer test-token' }
-    })
-  })
+		// Wait for workouts to load
+		expect(await screen.findByText(/running - 30 minutes/i)).toBeInTheDocument()
+		// Verify axios call
+		expect(axios.get).toHaveBeenCalledWith('https://localhost:5001/api/workouts', {
+			headers: { Authorization: 'Bearer test-token' }
+		})
+	})
 
-  it('logs out and redirects', async () => {
-    const { findByText } = await setup()
+	it('logs out and redirects', async () => {
+		const { findByText } = await setup()
 
-    // Click logout button
-    const logoutButton = await findByText(/logout/i)
-    fireEvent.click(logoutButton)
+		// Click logout button
+		const logoutButton = await findByText(/logout/i)
+		fireEvent.click(logoutButton)
 
-    // Token removed from localStorage
-    expect(localStorage.getItem('token')).toBeNull()
-    // You can add additional checks for navigation if needed
-  })
+		// Token removed from localStorage
+		expect(localStorage.getItem('token')).toBeNull()
+		// You can add additional checks for navigation if needed
+	})
 })
