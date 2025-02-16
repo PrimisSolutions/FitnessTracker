@@ -1,7 +1,12 @@
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace FitnessTrackerAPI.Data.Models
 {
     public class Workout
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public int UserId { get; set; } // Link to the user
         public required string Name { get; set; } // Name of the workout - user set

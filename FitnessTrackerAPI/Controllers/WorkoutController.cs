@@ -3,10 +3,12 @@ using Microsoft.EntityFrameworkCore;
 using FitnessTrackerAPI.Data;
 using FitnessTrackerAPI.Data.Models;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FitnessTrackerAPI.Controllers;
 
 [ApiController]
+[Authorize]
 [Route("api/[controller]")]
 public class WorkoutController : ControllerBase 
 {
