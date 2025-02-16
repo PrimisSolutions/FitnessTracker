@@ -22,6 +22,10 @@ const Workouts = () => {
 		fetchWorkouts();
 	}, []);
 
+	const handleAddWorkout = () => {
+		//TODO: Pop up a window to let user add a workout when clicked
+	}
+
 	return (
 		<div className="workouts-container">
 			<div>

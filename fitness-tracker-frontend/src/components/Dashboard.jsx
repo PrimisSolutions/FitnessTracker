@@ -20,7 +20,7 @@ const Dashboard = () => {
 	useEffect(() => {
 		const fetchWorkouts = async () => {
 			const token = localStorage.getItem('token');
-			const response = await axios.get('https://localhost:5054/api/workouts', {
+			const response = await axios.get('https://localhost:5054/api/workout', {
 				headers: { Authorization: `Bearer ${token}` }
 			});
 			setWorkouts(response.data);
@@ -30,10 +30,14 @@ const Dashboard = () => {
 
 	return (
 		<div className='dashboard'>
-			<button className='logout-button' onClick={handleLogout}>Logout</button>
+			<div className='header'>
+				<button className='logout-button' onClick={handleLogout}>Logout</button>
+			</div>
+			<div className='nav'>
+				{/* Navigation tabs will be added inside this div */}
+			</div>
 			<div className='dashboard-grid'>
-				<button className='grid-item' onClick={() => navigate('/workouts')}
-				>
+				<button className='grid-item' onClick={() => navigate('/workouts')}>
 					<h2>Workouts</h2>
 					<ul>
 						{workouts.slice(0, 5).map(workout => (
