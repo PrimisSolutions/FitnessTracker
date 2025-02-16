@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using FitnessTrackerAPI.Controllers;
 using FitnessTrackerAPI.Data;
+using FitnessTrackerAPI.Data.Models;
 
 namespace FitnessTrackerAPI.Tests.Controllers
 {
@@ -44,7 +45,7 @@ namespace FitnessTrackerAPI.Tests.Controllers
 			var workout = new Workout
 			{
 				Name = "Test Workout",
-				Description = "Test Description",
+				Type = "Test Type",
 				Date = DateTime.Now,
 				Duration = 60
 			};
@@ -56,7 +57,7 @@ namespace FitnessTrackerAPI.Tests.Controllers
 			var createdResult = Assert.IsType<CreatedAtActionResult>(result);
 			var returnedWorkout = Assert.IsType<Workout>(createdResult.Value);
 			Assert.Equal(workout.Name, returnedWorkout.Name);
-			Assert.Equal(workout.Description, returnedWorkout.Description);
+			Assert.Equal(workout.Type, returnedWorkout.Type);
 		}
 
 		[Fact]
@@ -68,7 +69,7 @@ namespace FitnessTrackerAPI.Tests.Controllers
 			var workout = new Workout
 			{
 				Name = "Test Workout",
-				Description = "Test Description",
+				Type = "Test Type",
 				Date = DateTime.Now,
 				Duration = 60
 			};
@@ -76,10 +77,12 @@ namespace FitnessTrackerAPI.Tests.Controllers
 
 			// Get workout ID
 			var postedWorkout = await context.Workouts.FirstOrDefaultAsync(w => w.Name == "Test Workout");
+			Assert.NotNull(postedWorkout);
+			
 			var workoutId = postedWorkout.Id;
 
 			// Act
-			var result = await controller.RemoveWorkout(workout_id);
+			var result = await controller.DeleteWorkout(workoutId);
 
 			// Assert
 			Assert.IsType<NoContentResult>(result);

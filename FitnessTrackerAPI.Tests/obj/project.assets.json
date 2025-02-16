@@ -3674,8 +3674,8 @@
     },
     "FitnessTrackerAPI/1.0.0": {
       "type": "project",
-      "path": "../FitnessTrackerAPI.csproj",
-      "msbuildProject": "../FitnessTrackerAPI.csproj"
+      "path": "../FitnessTrackerAPI/FitnessTrackerAPI.csproj",
+      "msbuildProject": "../FitnessTrackerAPI/FitnessTrackerAPI.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -3695,11 +3695,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\44780\\Documents\\Github Projects\\React and dotNet\\FitnessTracker\\FitnessTrackerAPI\\FitnessTrackerAPI.Tests\\FitnessTrackerAPI.Tests.csproj",
+      "projectUniqueName": "C:\\Users\\44780\\Documents\\Github Projects\\React and dotNet\\FitnessTracker\\FitnessTrackerAPI.Tests\\FitnessTrackerAPI.Tests.csproj",
       "projectName": "FitnessTrackerAPI.Tests",
-      "projectPath": "C:\\Users\\44780\\Documents\\Github Projects\\React and dotNet\\FitnessTracker\\FitnessTrackerAPI\\FitnessTrackerAPI.Tests\\FitnessTrackerAPI.Tests.csproj",
+      "projectPath": "C:\\Users\\44780\\Documents\\Github Projects\\React and dotNet\\FitnessTracker\\FitnessTrackerAPI.Tests\\FitnessTrackerAPI.Tests.csproj",
       "packagesPath": "C:\\Users\\44780\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\44780\\Documents\\Github Projects\\React and dotNet\\FitnessTracker\\FitnessTrackerAPI\\FitnessTrackerAPI.Tests\\obj\\",
+      "outputPath": "C:\\Users\\44780\\Documents\\Github Projects\\React and dotNet\\FitnessTracker\\FitnessTrackerAPI.Tests\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\44780\\AppData\\Roaming\\NuGet\\NuGet.Config"
