@@ -1,5 +1,8 @@
 /FitnessTrackerAPI/bin/Debug
 /FitnessTrackerAPI/obj
 /FitnessTrackerAPI/obj
+/FitnessTrackerAPI.Tests/bin/Debug
+/FitnessTrackerAPI.Tests/obj
 **/secrets.json
 *.pem
+/FitnessTrackerAPI.Tests/obj
