@@ -31,7 +31,7 @@ describe('Dashboard Component', () => {
 		// Wait for workouts to load
 		expect(await screen.findByText(/running - 30 minutes/i)).toBeInTheDocument()
 		// Verify axios call
-		expect(axios.get).toHaveBeenCalledWith('https://localhost:5001/api/workouts', {
+		expect(axios.get).toHaveBeenCalledWith('https://localhost:5054/api/workout', {
 			headers: { Authorization: 'Bearer test-token' }
 		})
 	})
