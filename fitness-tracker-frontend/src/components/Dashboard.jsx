@@ -27,7 +27,7 @@ const DASHBOARD_CARDS = [
 	},
 	{ title: 'Exercises', path: '/exercises', getContent: () => ['Coming soon...'] },
 	{ title: 'Diet', path: '/diet', getContent: () => ['Coming soon...'] },
-	{ title: 'Calories', path: '/calories', getContent: () => ['Coming soon...'] }
+	{ title: 'Challenges', path: '/challenges', getContent: () => ['Coming soon...'] }
 ];
 
 const Dashboard = () => {
