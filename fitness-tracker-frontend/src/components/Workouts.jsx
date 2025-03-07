@@ -1,5 +1,17 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { 
+	Box, 
+	Button, 
+	Dialog, 
+	DialogActions, 
+	DialogContent, 
+	DialogTitle, 
+	FormControl, 
+	InputLabel, 
+	MenuItem, 
+	Select, 
+	TextField } from '@mui/material';
 import workoutService from '../services/workoutsService';
 
 const Workouts = () => {
@@ -33,7 +45,6 @@ const Workouts = () => {
 	}, []);
 
 	const handleAddWorkout = () => {
-		//TODO: Pop up a window to let user add a workout when clicked
 		setOpen(true)
 	};
 
@@ -130,6 +141,89 @@ const Workouts = () => {
 					</tbody>
 				</table>
 			)}
+
+			{/* Workout Dialog */}
+			<Dialog open={open} onClose={handleClose}>
+				<DialogTitle>Add New Workout</DialogTitle>
+				<DialogContent>
+					{formError && (
+						<Box sx={{ color: 'error.main', mb: 2}}>{formError}</Box>
+					)}
+					<TextField
+					autoFocus
+					margin="dense"
+					id="name"
+					name="name"
+					label="Workout Name"
+					type="text"
+					fullWidth
+					variant="outlined"
+					value={newWorkout.name}
+					onChange={handleChange}
+					required
+					sx = {{ mb: 2}}
+					/>
+				<FormControl fullWidth sx={{ mb: 2}}>
+					<InputLabel id="workout-type-label">Workout Type</InputLabel>
+					<Select
+					labelId="workout-type-label"
+					id="type"
+					name="type"
+					value={newWorkout.type}
+					onChange={handleChange}
+					required
+					>
+						{workoutTypes.map((type) => (
+							<MenuItem key={type} value={type}>{type}</MenuItem>
+						))}
+					</Select>
+				</FormControl>
+				<TextField
+				margin="dense"
+				id="duration"
+				name="duration"
+				label="Duration (mins)"
+				type="number"
+				fullWidth
+				variant="outlined"
+				value={newWorkout.duration}
+				onChange={handleChange}
+				sx={{ mb: 2}}
+				/>
+				<TextField
+				margin="dense"
+				id="calories"
+				name="calories"
+				label="Calories Burned"
+				type="number"
+				fullWidth
+				variant="outlined"
+				value={newWorkout.calories}
+				onChange={handleChange}
+				sx={{ mb: 2}}
+				required
+				/>
+				<TextField
+				margin="dense"
+				id="date"
+				name="date"
+				label="Date"
+				type="date"
+				fullWidth
+				variant="outlined"
+				value={newWorkout.date}
+				onChange={handleChange}
+				required
+				slotProps={{inputLabel: {shrink: true}}}
+				/>
+				</DialogContent>
+				<DialogActions>
+					<Button onClick={handleClose}>Cancel</Button>
+					<Button onClick={handleSubmit} variant="contained" color="primary">
+						Add Workout
+						</Button>
+				</DialogActions>
+			</Dialog>
 		</div>
 	);
 };

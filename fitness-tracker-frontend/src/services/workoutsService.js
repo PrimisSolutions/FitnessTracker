@@ -17,4 +17,17 @@ const getWorkouts = async () => {
 	}
 };
 
-export default { getWorkouts };
+const createWorkout = async (workout) => {
+	const token = localStorage.getItem('token');
+	try {
+		const response = await axios.post(API_URL, workout, {
+			headers: { Authorization: `Bearer ${token}` }
+		});
+		return response.data;
+	} catch (error) {
+		console.error('Error creating workout:', error);
+		throw error;
+	}
+};
+
+export default { getWorkouts, createWorkout };

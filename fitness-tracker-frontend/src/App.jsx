@@ -5,7 +5,7 @@ import Register from './components/Register'
 import './App.css'
 import ProtectedRoute from './components/ProtectedRoute'
 import Workouts from './components/Workouts'
-import { ThemeProvider, createTheme } from '@mui/material'
+import { ThemeProvider, createTheme } from '@mui/material/styles'
 
 const theme = createTheme({
   palette: {
