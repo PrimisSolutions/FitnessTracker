@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import workoutService from '../services/workoutsService';
-import './Workouts.css';
 
 const Workouts = () => {
 	const [workouts, setWorkouts] = useState([]);
@@ -27,19 +26,19 @@ const Workouts = () => {
 	}
 
 	return (
-		<div className="workouts-container">
+		<div>
 			<div>
 				<button onClick={() => navigate('/dashboard')} className="back-button">
 					Back to Dashboard
 				</button>
 			</div>
-			<div className="header">
+			<div>
 				<h1>My Workouts</h1>
 			</div>
 			{loading ? (
 				<p>Loading workouts...</p>
 			) : (
-				<table className="workouts-table">
+				<table>
 					<thead>
 						<tr>
 							<th>Name</th>
