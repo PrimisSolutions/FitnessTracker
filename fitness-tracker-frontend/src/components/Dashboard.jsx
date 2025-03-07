@@ -67,9 +67,10 @@ const Dashboard = () => {
 			spacing={{ xs: 2, md: 3}}
 			columns={{ xs: 4, sm: 8, md: 12 }}>
 				{DASHBOARD_CARDS.map((card) => (
-					<Grid2 size={{xs: 2, sm: 4, md: 6}} >
+					<Grid2 key={`grid-${card.title}`}
+					 size={{xs: 2, sm: 4, md: 6}} >
 						<DashboardCard
-							key={card.title}
+							key={`card-${card.title}`}
 							title={card.title}
 							path={card.path}
 							content={card.getContent(workouts)}
