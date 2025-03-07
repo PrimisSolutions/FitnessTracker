@@ -1,79 +1,83 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import {
+	Box, Button, AppBar, Toolbar, Typography, Drawer, List,
+	ListItem, ListItemButton, ListItemText, Grid2, Card, CardContent
+} from '@mui/material';
+import DashboardCard from './DashboardCard';
+import DashboardHeader from './DashboardHeader';
+import DashboardSidebar from './DashboardSidebar';
+
+// Constants
+const DRAWER_WIDTH = 240;
+
+// Navigation items
+const MENU_ITEMS = [
+	{ text: 'Dashboard', path: '/dashboard' },
+	{ text: 'Profile', path: '/profile' },
+	{ text: 'Settings', path: '/settings' }
+];
+
+// Dashboard cards configuration
+const DASHBOARD_CARDS = [
+	{
+		title: 'Workouts', path: '/workouts', getContent: (workouts) =>
+			workouts.length > 0 ? workouts.slice(0, 5).map(w => `${w.type} – ${w.duration} minutes`) : ['No workouts found']
+	},
+	{ title: 'Exercises', path: '/exercises', getContent: () => ['Coming soon...'] },
+	{ title: 'Diet', path: '/diet', getContent: () => ['Coming soon...'] },
+	{ title: 'Calories', path: '/calories', getContent: () => ['Coming soon...'] }
+];
 
 const Dashboard = () => {
 	const [workouts, setWorkouts] = useState([]);
 	const navigate = useNavigate();
 
+	// Handle authentication
 	const handleLogout = () => {
-		clearLocalStorage();
-		navigate('/login');
-	}
-
-	const clearLocalStorage = () => {
 		localStorage.removeItem('token');
 		localStorage.removeItem('username');
+		navigate('/login');
 	};
 
+	// Fetch data
 	useEffect(() => {
 		const fetchWorkouts = async () => {
-			const token = localStorage.getItem('token');
-			const response = await axios.get('https://localhost:5054/api/workout', {
-				headers: { Authorization: `Bearer ${token}` }
-			});
-			setWorkouts(response.data);
+			try {
+				const token = localStorage.getItem('token');
+				const response = await axios.get('https://localhost:5054/api/workout', {
+					headers: { Authorization: `Bearer ${token}` }
+				});
+				setWorkouts(response.data);
+			} catch (error) {
+				console.error('Failed to fetch workouts:', error);
+			}
 		};
 		fetchWorkouts();
 	}, []);
 
 	return (
-		<div>
-			<div>
-				<button onClick={handleLogout}>
-					Logout
-				</button>
-			</div>
-
-			<div>
-				{/* Navigation content here ex. 'Dashboard', 'Profile', etc. */}
-			</div>
-
-			{/* Main grid area on the right (2x2 grid for your cards) */}
-			<div>
-				<button onClick={() => navigate('/workouts')}>
-					<h2>Workouts</h2>
-					<ul>
-						{workouts.slice(0, 5).map(workout => (
-							<li key={workout.id}>
-								{workout.type} – {workout.duration} minutes
-							</li>
-						))}
-					</ul>
-				</button>
-
-				<button onClick={() => navigate('/exercises')}>
-					<h2>Exercises</h2>
-					<ul>
-						<li>Coming soon...</li>
-					</ul>
-				</button>
-
-				<button onClick={() => navigate('/diet')}>
-					<h2>Diet</h2>
-					<ul>
-						<li>Coming soon...</li>
-					</ul>
-				</button>
-
-				<button onClick={() => navigate('/calories')}>
-					<h2>Calories</h2>
-					<ul>
-						<li>Coming soon...</li>
-					</ul>
-				</button>
-			</div>
-		</div>
+		<Box sx={{ flexGrow: 1 }}>
+			<DashboardHeader onLogout={handleLogout} />
+			<DashboardSidebar menuItems={MENU_ITEMS} onNavigate={navigate} />
+			{/* Main Content */}
+			<Grid2 
+			container 
+			spacing={{ xs: 2, md: 3}}
+			columns={{ xs: 4, sm: 8, md: 12 }}>
+				{DASHBOARD_CARDS.map((card) => (
+					<Grid2 size={{xs: 2, sm: 4, md: 6}} >
+						<DashboardCard
+							key={card.title}
+							title={card.title}
+							path={card.path}
+							content={card.getContent(workouts)}
+						/>
+					</Grid2>
+				))}
+			</Grid2>
+		</Box>
 	);
 };
 
