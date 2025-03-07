@@ -1,7 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import { describe, it, expect } from 'vitest'
 import { BrowserRouter } from 'react-router-dom'
-import React from 'react'
 import Login from '../Login'
 
 describe('Login Component', () => {
