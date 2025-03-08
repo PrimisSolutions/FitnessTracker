@@ -12,7 +12,7 @@ const Register = () => {
 			await authService.register(email, password);
 			navigate('/login');
 		} catch (error) {
-			alert('Registration failed');
+			alert('Registration failed: ', error);
 		}
 	};
 

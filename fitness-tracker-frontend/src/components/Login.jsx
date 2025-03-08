@@ -102,9 +102,9 @@ const Login = () => {
                     {loading ? <div className="animate-spin h-5 w-5 mx-auto border-2 border-white border-t-transparent rounded-full"></div> : 'Login'}
                 </button>
             </form>
-            <p className="mt-4 text-center text-sm text-gray-600">
-                Don't have an account?{' '}
-                <a href="/register" className="text-blue-600 hover:text-blue-700">
+			<p className="mt-4 text-center text-sm text-gray-600">
+				Don&apos;t have an account?{' '}
+				<a href="/register" className="text-blue-600 hover:text-blue-700">
                     Register here
                 </a>
             </p>

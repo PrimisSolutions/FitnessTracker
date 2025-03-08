@@ -2,15 +2,11 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import {
-	Box, Button, AppBar, Toolbar, Typography, Drawer, List,
-	ListItem, ListItemButton, ListItemText, Grid2, Card, CardContent
+	Box,  Grid2
 } from '@mui/material';
 import DashboardCard from './DashboardCard';
 import DashboardHeader from './DashboardHeader';
 import DashboardSidebar from './DashboardSidebar';
-
-// Constants
-const DRAWER_WIDTH = 240;
 
 // Navigation items
 const MENU_ITEMS = [

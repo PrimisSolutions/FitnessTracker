@@ -1,5 +1,6 @@
-import { render, screen, fireEvent, act, beforeEach } from '@testing-library/react'
-import { describe, it, expect, vi } from 'vitest'
+import { render, screen, fireEvent, act } from '@testing-library/react'
+import { describe, it, expect, vi, beforeEach } from 'vitest'
+import React from 'react'
 import { BrowserRouter } from 'react-router-dom'
 import axios from 'axios'
 import Dashboard from '../Dashboard'
