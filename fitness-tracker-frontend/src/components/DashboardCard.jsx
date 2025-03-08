@@ -8,6 +8,7 @@ import {
     ListItem,
     ListItemText
 } from "@mui/material";
+import PropTypes from "prop-types";
 
 const DashboardCard = ({ title, path, content }) => {
     const navigate = useNavigate();
@@ -18,7 +19,7 @@ const DashboardCard = ({ title, path, content }) => {
                 <Typography variant="h5" gutterBottom>{title}</Typography>
                 <List dense>
                     {content.map((text, index) => (
-                        <ListItem key={index}>
+                        <ListItem key={text}>
                             <ListItemText primary={text} />
                         </ListItem>
                     ))}
@@ -26,6 +27,12 @@ const DashboardCard = ({ title, path, content }) => {
             </CardContent>
         </Card>
     );
+};
+
+DashboardCard.propTypes = {
+    title: PropTypes.string.isRequired,
+    path: PropTypes.string.isRequired,
+    content: PropTypes.arrayOf(PropTypes.string).isRequired
 };
 
 export default DashboardCard;
